@@ -52,41 +52,41 @@ function make_arr() {
     let color = document.getElementById("inputs_color2").value; // צבע הגופן
     let backgroundColor = document.getElementById("inputs_color1").value;
 
-//	let place = 0;
-	
+    //	let place = 0;
+
     for (let i = 0, pos = 0; i < arrSize; i++) {
         let input = document.createElement("input"); // input כל תא מוגדר בשדה טקסט מסוג 
         input.className = "cell";
         input.style.color = color; // צבע גופן
         input.style.backgroundColor = backgroundColor; // צבע רקע
         input.type = "number"; // הקלט מסוג מספר
-        
+
         //pos += Number(input.style.width.replace("px", ""));
         //let width = Number(input.style.width.replace("px", ""));
         //input.style.left = pos + width + "px"; // הזזת תא ימינה בהתאם למיקומו
 
-		//input.onchange = 
+        //input.onchange = 
         input.onkeyup = function () { this.style.width = ((this.value.length + 3) * 8) + 'px' }; // שינוי אוטומטי של רוחב התא בהתאם להגדלת/הקטנת הערך ע"י החיצים או בהקלדה
 
         if (document.getElementById("random").checked) {
             let min = Number(document.getElementById("min").value); // ערך מינימלי להגרלה
             let max = Number(document.getElementById("max").value); // ערך מקסימלי להגרלה
             let point = Number(document.getElementById("point").value); // כמות ספרות אחרי הנקודה להגרלה
-			let value = Number((Math.random() * (max - min) + min).toFixed(point)); // הגרלת ערך
+            let value = Number((Math.random() * (max - min) + min).toFixed(point)); // הגרלת ערך
             input.value = value;
             //	input.style.width = ((max.toString().length + point + 3) * 8).toString() + "px"; // כל התאים ברוחב זהה - רוחב הערך המקסימלי האפשרי
         }
 
-		input.style.width = ((input.value.length + 3) * 8) + "px"; // רוחב כל תא בהתאם לתכנו
+        input.style.width = ((input.value.length + 3) * 8) + "px"; // רוחב כל תא בהתאם לתכנו
         arrElem.appendChild(input); // html הצגת התא בדף ה
-        arr.push(input);	
+        arr.push(input);
     }
-	
+
     //Start: Added by Ohad
-    let myArr = [4000, 5, 2, 1, 3, 9, 5, 4, 700, 6];
+    let myArr = [4, 5, 2000, 1, 3, 9, 5, 4, 700, 6];
     for (let i = 0; i < arr.length; i++) {
         arr[i].value = myArr[i];
-		arr[i].style.width = ((arr[i].value.length + 3) * 8) + "px"; // רוחב כל תא בהתאם לתכנו
+        arr[i].style.width = ((arr[i].value.length + 3) * 8) + "px"; // רוחב כל תא בהתאם לתכנו
     }
     //End: Added by Ohad
 
@@ -105,31 +105,31 @@ function sort(arr) {
     // האנימציה מוצגת במהירות נוכה לצפיה כאשר היא מכוונת על 2000 שזה 2 שניות
     // ה 2000 מתייחס לאנימציה של ההשוואה בין שני תאים. לפי זה מחושבת האנימציה של ההחלפה בין שני תאים
     speed = (100 - (Number(document.getElementById("speed").value)) + 1) * 40;
-	
-	
-	// בפונקציה הנ"ל יש באג, שהמיקום החדש לא מדויק, לא הבנתי מה ההבדל בין כל הסוגים הבאים
-	// getBoundingClientRect().left
-	// arr[i].offsetLeft
-	// arr[i].style.left
-	
-	// relative אחד שמוגדר כ div וכולם מוגדרים בתוך absolute מוגדר כ input כדי שהאנימציה תוכל לפעול, כל
-	// גורם לתאים לאבד את מיקומם. מטרת הלולאה להתגבר על באג זה absolute קיים באג שבהגדרת
-	// הבעיה היא שהצורה הזו גורמת לכך שכשתא אחד מתעדכן בערך רחב יותר שאר התאים לא זזים
-	for (let i = 0; i < arr.length; i++) {
-		let left = arr[i].offsetLeft;
-		//console.log("left = " + left);
-		arr[i].style.position = 'absolute';
-		arr[i].style.left = left + "px";
-		//console.log("left = " + left);
-		//alert("left = " + left);	
-    }
+
+    debugger;
+    // בפונקציה הנ"ל יש באג, שהמיקום החדש לא מדויק, לא הבנתי מה ההבדל בין כל הסוגים הבאים
+    // arr[i].getBoundingClientRect().left
+    // arr[i].offsetLeft
+    // arr[i].style.left
+
+    // relative אחד שמוגדר כ div וכולם מוגדרים בתוך absolute מוגדר כ input כדי שהאנימציה תוכל לפעול, כל
+    // גורם לתאים לאבד את מיקומם. מטרת הלולאה להתגבר על באג זה absolute קיים באג שבהגדרת
+    // הבעיה היא שהצורה הזו גורמת לכך שכשתא אחד מתעדכן בערך רחב יותר שאר התאים לא זזים
+    // for (let i = 0; i < arr.length; i++) {
+    //     let left = arr[i].offsetLeft;
+    //     //console.log("left = " + left);
+    //     //arr[i].style.position = "absolute";
+    //     arr[i].style.left = left + "px";
+    //     //console.log("left = " + left);
+    //     //alert("left = " + left);	
+    // }
 
     let e = document.getElementById("select_sort").value;
-	//TODO: Change the ifs to switch-case
+    //TODO: Change the ifs to switch-case
     //let arr = make_arr();
     if (e === "bubble") {
         bubbleSort(arr);
-	}
+    }
 
     if (e === "selection")
         selectionSort(arr);
@@ -144,11 +144,11 @@ function sort(arr) {
         mergeSort(arr);
 
     if (e === "all") {
-		let arr_bubble = copyInputs(arr, "arr_bubble");
-		let arr_selection = copyInputs(arr, "arr_selection");
+        let arr_bubble = copyInputs(arr, "arr_bubble");
+        let arr_selection = copyInputs(arr, "arr_selection");
         bubbleSort(arr_bubble, "comp_bubble", "swap_bubble");
-		selectionSort(arr_selection, "comp_selection", "swap_selection");
-	}
+        selectionSort(arr_selection, "comp_selection", "swap_selection");
+    }
 }
 
 // הסבר של כל מיון
@@ -224,79 +224,82 @@ yield delay
 // http://jsfiddle.net/Noseratio/r56Vb/5
 */
 
-function swapAnimation2(){
-	
+function swapAnimation2() {
+
 }
 
 // מיון בועות
 function bubbleSort(arrI, comp_id = "comp", swap_id = "swap") {
 
-	let steps = 0;
-/*
-	setTimeout(function() {swapAnimation(arrI[2], arrI[3]);}, (steps++) * speed * 1.05);
-	setTimeout(function() {swapAnimation(arrI[3], arrI[4]);}, (steps++) * speed * 1.05);
-	setTimeout(function() {swapAnimation(arrI[5], arrI[6]);}, (steps++) * speed * 1.05);
-	setTimeout(function() {swapAnimation(arrI[6], arrI[7]);}, (steps++) * speed * 1.05);
-	setTimeout(function() {swapAnimation(arrI[8], arrI[9]);}, (steps++) * speed * 1.05);
-	setTimeout(function() {swapAnimation(arrI[0], arrI[1]);}, (steps++) * speed * 1.05);
-	setTimeout(function() {swapAnimation(arrI[1], arrI[2]);}, (steps++) * speed * 1.05);
-	setTimeout(function() {swapAnimation(arrI[2], arrI[3]);}, (steps++) * speed * 1.05);
-	setTimeout(function() {swapAnimation(arrI[5], arrI[6]);}, (steps++) * speed * 1.05);
-	setTimeout(function() {swapAnimation(arrI[7], arrI[8]);}, (steps++) * speed * 1.05);
-	setTimeout(function() {swapAnimation(arrI[0], arrI[1]);}, (steps++) * speed * 1.05);
-	setTimeout(function() {swapAnimation(arrI[4], arrI[5]);}, (steps++) * speed * 1.05);
-*/
+    swapAnimation(arrI[2], arrI[5]);
 
-	let arr = [];
-	for(let i = 0; i < arrI.length; i++){
-		arr[i] = Number(arrI[i].value);
-	}
-
-	
-
-    let sorted = false;
-    for (let i = 0; i < arr.length - 1; i++) {
-		sorted = true;
-        for (let j = 0; j < arr.length - 1 - i; j++) {
-            
-				document.getElementById(comp_id).textContent = Number(document.getElementById(comp_id).textContent) + 1; // הגדלת מונה ההשוואות
-                
-				
-					// הפעלת אנימציה של השוואה
-					setTimeout(
-					function() {
-						compareAnimation(arrI[j] , arrI[j + 1]);
-					}, (steps++) * speed * 1.05);
-					
-					if (arr[j] > arr[j + 1]) {
-                    sorted = false;
-					document.getElementById(swap_id).textContent = Number(document.getElementById(swap_id).textContent) + 1; // הגדלת מונה החלפת הערכים
-				
-					// הפעלת אנימציה של החלפה
-					setTimeout(
-						function() {
-						swapAnimation(arrI[j], arrI[j + 1]);
-						
-						// צריך להכנס לתוך האנימציה inputs החלפת המערך של ה
-						let tmp1 = arrI[j];
-						arrI[j] = arrI[j + 1];
-						arrI[j + 1] = tmp1;
-					
-						
-					//	console.log(j + " " + (j + 1));
-					}, (steps++) * speed * 1.05);
-				
-					
-				//	swap(arr,j, j + 1);
-					let tmp = arr[j];
-					arr[j] = arr[j + 1];
-					arr[j + 1] = tmp;
-					}
+    let steps = 0;
+    /*
+        setTimeout(function() {swapAnimation(arrI[2], arrI[3]);}, (steps++) * speed * 1.05);
+        setTimeout(function() {swapAnimation(arrI[3], arrI[4]);}, (steps++) * speed * 1.05);
+        setTimeout(function() {swapAnimation(arrI[5], arrI[6]);}, (steps++) * speed * 1.05);
+        setTimeout(function() {swapAnimation(arrI[6], arrI[7]);}, (steps++) * speed * 1.05);
+        setTimeout(function() {swapAnimation(arrI[8], arrI[9]);}, (steps++) * speed * 1.05);
+        setTimeout(function() {swapAnimation(arrI[0], arrI[1]);}, (steps++) * speed * 1.05);
+        setTimeout(function() {swapAnimation(arrI[1], arrI[2]);}, (steps++) * speed * 1.05);
+        setTimeout(function() {swapAnimation(arrI[2], arrI[3]);}, (steps++) * speed * 1.05);
+        setTimeout(function() {swapAnimation(arrI[5], arrI[6]);}, (steps++) * speed * 1.05);
+        setTimeout(function() {swapAnimation(arrI[7], arrI[8]);}, (steps++) * speed * 1.05);
+        setTimeout(function() {swapAnimation(arrI[0], arrI[1]);}, (steps++) * speed * 1.05);
+        setTimeout(function() {swapAnimation(arrI[4], arrI[5]);}, (steps++) * speed * 1.05);
+    */
+    /*
+        let arr = [];
+        for(let i = 0; i < arrI.length; i++){
+            arr[i] = Number(arrI[i].value);
         }
-		if (sorted) break;
-    }
-	
-	console.log(arr);
+    
+    	
+    
+        let sorted = false;
+        for (let i = 0; i < arr.length - 1; i++) {
+            sorted = true;
+            for (let j = 0; j < arr.length - 1 - i; j++) {
+                
+                    document.getElementById(comp_id).textContent = Number(document.getElementById(comp_id).textContent) + 1; // הגדלת מונה ההשוואות
+                    
+                	
+                        // הפעלת אנימציה של השוואה
+                        setTimeout(
+                        function() {
+                            compareAnimation(arrI[j] , arrI[j + 1]);
+                        }, (steps++) * speed * 1.05);
+                    	
+                        if (arr[j] > arr[j + 1]) {
+                        sorted = false;
+                        document.getElementById(swap_id).textContent = Number(document.getElementById(swap_id).textContent) + 1; // הגדלת מונה החלפת הערכים
+                	
+                        // הפעלת אנימציה של החלפה
+                        setTimeout(
+                            function() {
+                            swapAnimation(arrI[j], arrI[j + 1]);
+                        	
+                            // צריך להכנס לתוך האנימציה inputs החלפת המערך של ה
+                            let tmp1 = arrI[j];
+                            arrI[j] = arrI[j + 1];
+                            arrI[j + 1] = tmp1;
+                    	
+                        	
+                        //	console.log(j + " " + (j + 1));
+                        }, (steps++) * speed * 1.05);
+                	
+                    	
+                    //	swap(arr,j, j + 1);
+                        let tmp = arr[j];
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = tmp;
+                        }
+            }
+            if (sorted) break;
+        }
+    	
+        console.log(arr);
+        */
 }
 
 function bubbleSortOLD(arr, comp_id = "comp", swap_id = "swap") {
@@ -308,10 +311,10 @@ function bubbleSortOLD(arr, comp_id = "comp", swap_id = "swap") {
             setTimeout(function (j, end) {
                 if (finish) return;
                 if (j == 0) sorted = true;
-				document.getElementById(comp_id).textContent = Number(document.getElementById(comp_id).textContent) + 1; // הגדלת מונה ההשוואות
+                document.getElementById(comp_id).textContent = Number(document.getElementById(comp_id).textContent) + 1; // הגדלת מונה ההשוואות
                 if (compareAnimation(arr[j], arr[j + 1]) == 1) {
                     sorted = false;
-					document.getElementById(swap_id).textContent = Number(document.getElementById(swap_id).textContent) + 1; // הגדלת מונה החלפת הערכים
+                    document.getElementById(swap_id).textContent = Number(document.getElementById(swap_id).textContent) + 1; // הגדלת מונה החלפת הערכים
                     swapAnimation(arr[j], arr[j + 1]);
                 }
                 if (sorted && j === end) finish = true;
@@ -328,14 +331,14 @@ function selectionSort(arr, comp_id = "comp", swap_id = "swap") {
         for (let j = i + 1; j < arr.length; j++) {
             setTimeout(function (i, j) {
                 if (j == i + 1) min = i;
-				document.getElementById(comp_id).textContent = Number(document.getElementById(comp_id).textContent) + 1; // הגדלת מונה ההשוואות
+                document.getElementById(comp_id).textContent = Number(document.getElementById(comp_id).textContent) + 1; // הגדלת מונה ההשוואות
                 if (compareAnimation(arr[min], arr[j]) == 1)
                     min = j;
 
                 if (j == arr.length - 1 && i != min) {
-					document.getElementById(swap_id).textContent = Number(document.getElementById(swap_id).textContent) + 1; // הגדלת מונה החלפת הערכים
+                    document.getElementById(swap_id).textContent = Number(document.getElementById(swap_id).textContent) + 1; // הגדלת מונה החלפת הערכים
                     swapAnimation(arr[i], arr[min]);
-				}
+                }
 
             }, (steps++) * speed * 1.05, i, j);
         }
@@ -382,17 +385,17 @@ function insertionSort(arr) {
 
 // מיון מהיר
 function quickSort(arrI) {
-	
-	let arr = [];
-	for(let i = 0; i < arrI.length; i++){
-		arr[i] = Number(arrI[i].value);
-	}
-	
-	console.log(arr);
-	
-    Quicksort.sort(arr, arrI ,0,arr.length - 1);
-	
-	console.log(arr);
+
+    let arr = [];
+    for (let i = 0; i < arrI.length; i++) {
+        arr[i] = Number(arrI[i].value);
+    }
+
+    console.log(arr);
+
+    Quicksort.sort(arr, arrI, 0, arr.length - 1);
+
+    console.log(arr);
 }
 
 /**
@@ -412,11 +415,11 @@ function quickSort(arrI) {
  * @author Itshak Shclissel
  */
 let Quicksort = (function () {
-	
-			
 
-	let steps = 0;
-	
+
+
+    let steps = 0;
+
 	/**
      * Partitions the (sub)array into values less than and greater
      * than the pivot value
@@ -425,46 +428,44 @@ let Quicksort = (function () {
      * @param {int} left The index of the leftmost element
      * @param {int} right The index of the rightmost element
      */
-    function partition (arr, arrI, left, right)
-	{
-		let i = left - 1, j = right + 1;
-		while (true)
-		{
-			do {
-				i++;
-				setTimeout( function(left, i) {
-					compareAnimation(arrI[left] , arrI[i]);
-				}, (steps++) * speed * 1.05, left, i); // הפעלת אנימציה של השוואה			
-			} while (arr[left] > arr[i]) // pivot = arr[left]
-			
-			do {
-				j--;
-				setTimeout( function(j, left) {
-					compareAnimation(arrI[j] , arrI[left]);
-				}, (steps++) * speed * 1.05, j, left); // הפעלת אנימציה של השוואה
-			} while (arr[j] > arr[left]);
-			if (i >= j) return j;
-			
-			
-			console.log ("real: " + i + " " + j);
-			setTimeout( function(i, j) {
-				console.log ("swap: " + i + " " + j);
-				swapAnimation(arrI[i], arrI[j]); // הפעלת אנימציה של החלפה		 			
-				// צריך להכנס לתוך האנימציה inputs החלפת המערך של ה
-				let tmp1 = arrI[i];
-				arrI[i] = arrI[j];
-				arrI[j] = tmp1;
-			}, (steps++) * speed * 1.05, i, j);
-			
-			// החלפה בפועל
-			
-			let tmp2 = arr[i];
-			arr[i] = arr[j];
-			arr[j] = tmp2;
-			
-		}
-	}
-	
+    function partition(arr, arrI, left, right) {
+        let i = left - 1, j = right + 1;
+        while (true) {
+            do {
+                i++;
+                setTimeout(function (left, i) {
+                    compareAnimation(arrI[left], arrI[i]);
+                }, (steps++) * speed * 1.05, left, i); // הפעלת אנימציה של השוואה			
+            } while (arr[left] > arr[i]) // pivot = arr[left]
+
+            do {
+                j--;
+                setTimeout(function (j, left) {
+                    compareAnimation(arrI[j], arrI[left]);
+                }, (steps++) * speed * 1.05, j, left); // הפעלת אנימציה של השוואה
+            } while (arr[j] > arr[left]);
+            if (i >= j) return j;
+
+
+            console.log("real: " + i + " " + j);
+            setTimeout(function (i, j) {
+                console.log("swap: " + i + " " + j);
+                swapAnimation(arrI[i], arrI[j]); // הפעלת אנימציה של החלפה		 			
+                // צריך להכנס לתוך האנימציה inputs החלפת המערך של ה
+                let tmp1 = arrI[i];
+                arrI[i] = arrI[j];
+                arrI[j] = tmp1;
+            }, (steps++) * speed * 1.05, i, j);
+
+            // החלפה בפועל
+
+            let tmp2 = arr[i];
+            arr[i] = arr[j];
+            arr[j] = tmp2;
+
+        }
+    }
+
 
     /**
      * Sorts the (sub-)array
@@ -473,15 +474,13 @@ let Quicksort = (function () {
      * @param {int} left The index of the leftmost element, defaults 0
      * @param {int} right The index of the rightmost element, defaults array.length-1
      */
-	function quickSort(arr, arrI, left, right)
-	{	
-		if (left < right)
-		{
-			let pivot = partition (arr, arrI, left, right);
-			quickSort (arr, arrI, left, pivot);
-			quickSort (arr, arrI, pivot + 1, right);
-		}
-	}
+    function quickSort(arr, arrI, left, right) {
+        if (left < right) {
+            let pivot = partition(arr, arrI, left, right);
+            quickSort(arr, arrI, left, pivot);
+            quickSort(arr, arrI, pivot + 1, right);
+        }
+    }
 
     return {
         sort: quickSort
@@ -559,7 +558,7 @@ function bold(start, end, time) {
 }
 
 function copyInputs(arr, id) {
-	// let color = document.getElementById("inputs_color2").value;
+    // let color = document.getElementById("inputs_color2").value;
     // let backgroundColor = document.getElementById("inputs_color1").value;
     // for (let i = 0; i < arr.length; i++) {
     // 	let input = document.createElement("input");
@@ -575,22 +574,22 @@ function copyInputs(arr, id) {
     let clone = document.getElementById("arr").cloneNode(true);
     document.getElementById(id).appendChild(clone);
 
-	let newArr = [];
+    let newArr = [];
     for (let i = 0; i < arr.length; i++) {
         clone.childNodes[i].addEventListener("keyup", function () {
             this.style.width = ((this.value.length + 3) * 8) + 'px';
         });
-		newArr.push(clone.childNodes[i]);
+        newArr.push(clone.childNodes[i]);
     }
-	return newArr;
+    return newArr;
 }
 
-function compareAnimation(value1, value2){
-	// אנימציה
+function compareAnimation(value1, value2) {
+    // אנימציה
     value1.style.borderColor = value2.style.borderColor = document.getElementById("inputs_color3").value;
 
     // הגדלת מונה ההשוואות
-//  document.getElementById('comp').textContent = Number(document.getElementById('comp').textContent) + 1;
+    //  document.getElementById('comp').textContent = Number(document.getElementById('comp').textContent) + 1;
 
     // החזרת המראה הגרפי לפני האנימציה
     setTimeout(function () {
@@ -617,84 +616,105 @@ arr[i] הוא i של תא id המייצג את מיקומו במערך, כלומ
 בכדי לשמור על הסדר, לא נחליף בין שני תאים, אלא נסתיר את שניהם, נחליף ביניהם את הערכים, נשכפל אותם לתאים זמניים שניצור
 נבצע את אנימציית ההחלפה על התאים הזמניים ובסיומה נמחק את התאים הזמניים ונציג שוב את המקוריים
 */
-    /**
-     * Swaps two values in the heap
-     *
-     * @param {int} indexA Index of the first item to be swapped
-     * @param {int} indexB Index of the second item to be swapped
-     */
-function swap(arr, i, j){
-	let tmp = arr[i];
-	arr[i] = arr[j];
-	arr[j] = tmp;
-	//b = [a, a = b][0];
+/**
+ * Swaps two values in the heap
+ *
+ * @param {int} indexA Index of the first item to be swapped
+ * @param {int} indexB Index of the second item to be swapped
+ */
+function swap(arr, i, j) {
+    let tmp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = tmp;
+    //b = [a, a = b][0];
 }
-	 
-	 
+
+//  let first1= true;
+//     let first2= true;
 function swapAnimation(elem1, elem2) {//value1 == inputElement
-    
+    //     let t, e2, e1 = elem1.value;
+    //     t = e1;
+    //     elem1.value = e2 = elem2.value;
+    //     elem2.value = t;
+
+
     //TODO: Move the actual cells without making a copy
-	let old = false;
+    let old = false;
     if (old) {
-		
-		let copy;
+
+        let copy;
         // יצירת העתק של תא שמאל
         copy = document.createElement("input");
         copy.style.cssText = elem1.style.cssText;
-        copy.style.position = 'absolute';
+        copy.style.position = "absolute";
         copy.type = elem1.type;
         copy.value = elem1.value;
-        document.getElementById("arr").appendChild(copy);     
-		
-		// הסתרת התאים המקוריים
-		elem1.style.visibility = elem2.style.visibility = "hidden";
-		
-		// קביעת האורכים רק לאחר החלפת הערכים, למקרה שהתאים המוחלפים באורכים שונים
-		o1.style.left = elem1.getBoundingClientRect().left + "px";
-		o2.style.left = elem2.getBoundingClientRect().left + "px";
+        document.getElementById("arr").appendChild(copy);
+
+        // הסתרת התאים המקוריים
+        elem1.style.visibility = elem2.style.visibility = "hidden";
+
+        // קביעת האורכים רק לאחר החלפת הערכים, למקרה שהתאים המוחלפים באורכים שונים
+        o1.style.left = elem1.getBoundingClientRect().left + "px";
+        o2.style.left = elem2.getBoundingClientRect().left + "px";
     }
-   
 
-	
+
+
     // החלפת הערכים
-    
- //   elem1.style.width = o2.style.width;
- //   elem2.style.width = o1.style.width;
 
-//	o1 = elem1;
- //   o2 = elem2;
-	
+    //   elem1.style.width = o2.style.width;
+    //   elem2.style.width = o1.style.width;
+
+    //	o1 = elem1;
+    //   o2 = elem2;
+
 
     // הגדלת מונה החלפת הערכים
-//  document.getElementById('swap').textContent = Number(document.getElementById('swap').textContent) + 1;
-let curve1;
-let curve2;
+    //  document.getElementById('swap').textContent = Number(document.getElementById('swap').textContent) + 1;
+    //let curve1;
+    //let curve2;
     // הגדרות האנימציה של העתק התא השמאלי
 
-//	else{
-	let x1_div1 = elem1.offsetLeft; // מוצא בפיקסלים משמאל
-    let y1_div1 = elem1.offsetTop; // מוצא/יעד בפיקסלים מלמעלה
-    let y2_div1 = y1_div1;
-    let x2_div1 = elem2.offsetLeft; // יעד בפיקסלים משמאל
+    //	else{
+    // let fromX1 = elem1.offsetLeft; // מוצא בפיקסלים משמאל
+    let fromX1 = 0; // מוצא בפיקסלים משמאל
+    let fromY1 = elem1.offsetTop; // מוצא/יעד בפיקסלים מלמעלה
+    let from1 = [fromX1, fromY1];
+
+    let toX1 = elem2.offsetLeft; // יעד בפיקסלים משמאל
+    let toY1 = fromY1;
+    let to1 = [toX1, toY1];
+
     let height1 = 25; // גובה הקשת
-    curve1 = new CurveAnimator([x1_div1, y1_div1], [x2_div1, y2_div1], [x1_div1 + 10, y1_div1 - height1], [x2_div1 - 10, y2_div1 - height1]);
+    let begingingControlPoint1 = [fromX1 + 10, fromY1 - height1];
+    let endControlPoint1 = [toX1 - 10, toY1 - height1];
+
+    let curve1 = new CurveAnimator(from1, to1, begingingControlPoint1, endControlPoint1);
 
     // הגדרות האנימציה של העתק התא הימני
-    let x1_div2 = elem2.offsetLeft; // מוצא בפיקסלים משמאל
-    let y1_div2 = elem2.offsetTop; // מוצא/יעד בפיקסלים מלמעלה
-    let y2_div2 = y1_div2;
-    let x2_div2 = elem1.offsetLeft; // יעד בפיקסלים משמאל
+    //let x1_div2 = elem2.offsetLeft; // מוצא בפיקסלים משמאל
+    let fromX2 = 0; // מוצא בפיקסלים משמאל
+    let fromY2 = elem2.offsetTop; // מוצא/יעד בפיקסלים מלמעלה
+    let toY2 = fromY2;
+    let toX2 = elem1.offsetLeft; // יעד בפיקסלים משמאל
     const height2 = -25; // גובה הקשת
-    curve2 = new CurveAnimator([x1_div2, y1_div2], [x2_div2, y2_div2], [x1_div2 - 10, y1_div2 - height2], [x2_div2 + 10, y2_div2 - height2]);
-//	}
+    let curve2 = new CurveAnimator([fromX2, fromY2], [toX2, toY2], [fromX2 - 10, fromY2 - height2], [toX2 + 10, toY2 - height2]);
+    //	}
     curve1.animate(2, function (point, angle) {
-	//	if(old){
-     //   o1.style.left = point.x + "px";
-      //  o1.style.top = point.y + "px";
-	//	}else{
-			elem1.style.left = point.x + "px";
+        //	if(old){
+        //   o1.style.left = point.x + "px";
+        //  o1.style.top = point.y + "px";
+        //	}else{
+
+        elem1.style.left = point.x + "px";
+        //elem1.style.left = (elem1.style.left === ""? 1 : Number(elem1.style.left.replace("px","")) + 1) + "px";
         elem1.style.top = point.y + "px";
-	//	}
+        //  if (first1) {
+        //     elem1.value = e1;
+        //     first1 = false;
+        // }
+        //	}
         // o1.style.transform =
         //     o1.style.webkitTransform =
         //     o1.style.MozTransform =
@@ -703,34 +723,39 @@ let curve2;
         // console.log("o1.style.top = " + point.y + "px");
         // מחיקת ההעתקים והצגת התאים המקוריים לאחר סיום האנימציה
         if (old) {
-            if (o1.getBoundingClientRect().left == x2_div1) {
+            if (o1.getBoundingClientRect().left == toX1) {
                 //	if (o2.getBoundingClientRect().left == x2_div2) // curve2.animate שני ההעתקים מגיעים ליעדם באותו הזמן, לכן ניתן גם לכתוב כך וכן ניתן לשים פונקציה זו ב
 
                 // החזרת התאים המקוריים
                 elem1.style.visibility =
-				//elem2.style.visibility =
-				"visible";
+                    //elem2.style.visibility =
+                    "visible";
 
                 // הסרת העתקיי התאים
                 o1.parentNode.removeChild(o1);
-               // o2.parentNode.removeChild(o2);
+                // o2.parentNode.removeChild(o2);
             }
         }
     });
 
     curve2.animate(2, function (point, angle) {
+
         elem2.style.left = point.x + "px";
         elem2.style.top = point.y + "px";
-		if(old){
-			if (elem2.getBoundingClientRect().left == x2_div2){
-				
-				// החזרת התאים המקוריים
-                 elem2.style.visibility = "visible";
+        if (old) {
+            if (elem2.getBoundingClientRect().left == toX2) {
+
+                // החזרת התאים המקוריים
+                elem2.style.visibility = "visible";
 
                 // הסרת העתקיי התאים
                 elem2.parentNode.removeChild(elem2);
-			}
-		}
+            }
+        }
+        //  if (first2) {
+        //     elem1.value = e2;
+        //     first2 = false;
+        // }
         // console.log("o2.style.left = " + point.x + "px");
         // console.log("o2.style.top = " + point.y + "px");
         // o2.style.transform =
@@ -744,40 +769,40 @@ let curve2;
 //////////////////////////////////////////////////////////// BEGIN CurveAnimator /////////////////////////////////////////////////////
 function CurveAnimator(from, to, c1, c2) {
     this.path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-	//if (!c1) c1 = from;
-	//if (!c2) c2 = to;
+    //if (!c1) c1 = from;
+    //if (!c2) c2 = to;
     this.path.setAttribute('d', 'M' + from.join(',') + 'C' + c1.join(',') + ' ' + c2.join(',') + ' ' + to.join(','));
     this.updatePath();
-	//CurveAnimator.lastCreated = this;
+    //CurveAnimator.lastCreated = this;
 }
 
 CurveAnimator.prototype.animate = function (duration, callback, delay) {
     let curveAnim = this;
-	// TODO: Use requestAnimationFrame if a delay isn't passed
-	//if (!delay) delay = 1/40;
-	clearInterval(curveAnim.animTimer);
+    // TODO: Use requestAnimationFrame if a delay isn't passed
+    //if (!delay) delay = 1/40;
+    clearInterval(curveAnim.animTimer);
     let startTime = new Date;
     //let startTime = Date.now();
     curveAnim.animTimer = setInterval(function () {
         let now = new Date;
         //let now = Date.now();
         let elapsed = (now - startTime) / (speed / 4);
-//        let elapsed = (now - startTime) / 1000;
+        //        let elapsed = (now - startTime) / 1000;
         let percent = elapsed / duration;
-			if (percent>=1){
-				percent = 1;
-				clearInterval(curveAnim.animTimer);
-			}
-			//var p1 = curveAnim.pointAt(percent-0.01),
-			//    p2 = curveAnim.pointAt(percent+0.01);
-			let rotateDegree = 0; // Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180 / Math.PI
+        if (percent >= 1) {
+            percent = 1;
+            clearInterval(curveAnim.animTimer);
+        }
+        //var p1 = curveAnim.pointAt(percent-0.01),
+        //    p2 = curveAnim.pointAt(percent+0.01);
+        let rotateDegree = 0; // Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180 / Math.PI
         callback(curveAnim.pointAt(percent), rotateDegree);
-    } );//,delay * (speed / 4)
+    });//,delay * (speed / 4)
 };
 
-CurveAnimator.prototype.stop = function(){
-		clearInterval(this.animTimer);
-	};
+CurveAnimator.prototype.stop = function () {
+    clearInterval(this.animTimer);
+};
 
 CurveAnimator.prototype.pointAt = function (percent) {
     return this.path.getPointAtLength(this.len * percent);
