@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>מיונים רבותיי, מיונים</title>
+	<!-- קידוד טקסט -->
+	<meta charset="utf-8">
+
+	<!-- CSS עיצוביי -->
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+	<!--  JavaScript סקריפטים ב -->
+	<script src="scripts.js"></script>
+</head>
+
+<body>
+	<table>
+		<tr>
+			<td valign="top" class="td_fieldset1">
+				<fieldset id="fieldset1">
+					<legend>מאפייני מערך:</legend>
+					<table>
+						<tr>
+							<td>צבע רקע תאי המערך</td>
+							<td><input type="color" value="#64dbcc" id="inputs_color1" style="width: 40px"></td>
+							<td>&emsp;צבע גבול שני תאים שמושווים או מוחלפים</td>
+							<td><input type="color" value="#ff0000" id="inputs_color3" style="width: 40px"></td>
+						</tr>
+						<tr>
+							<td>צבע גופן תאי המערך</td>
+							<td><input type="color" value="" id="inputs_color2" style="width: 40px"></td>
+							<td>&emsp;צבע גבול תת מערך שמופעלת עליו רקורסיה</td>
+							<td><input type="color" value="#008000" id="inputs_color4" style="width: 40px"></td>
+						</tr>
+						<tr>
+							<td>
+								<br />
+								<input style="margin-right: 0" type="radio" name="values" id="manually" onchange="document.getElementById('point').disabled = document.getElementById('min').disabled = document.getElementById('max').disabled = true">								הזנת ערכים ידנית
+							</td>
+							<td>
+							</td>
+							<td><br />&emsp;מספר איברי המערך</td>
+							<td><br /><input type="number" value="10" min="5" max="20" id="inputs_num" style="width: 40px; direction: ltr"></td>
+						</tr>
+						<tr>
+							<td>
+								<input style="margin-right: 0" type="radio" name="values" id="random" checked="checked" onchange="document.getElementById('point').disabled = document.getElementById('min').disabled = document.getElementById('max').disabled = false">								הגרלת ערכים
+							</td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>ספרות אחרי הנקודה</td>
+							<td><input type="number" id="point" style="width: 40px; direction: ltr" value="0" min="0"></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>ערך מינימלי</td>
+							<td><input type="number" id="min" style="width: 40px; direction: ltr" value="1"></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>ערך מקסימלי</td>
+							<td><input type="number" id="max" style="width: 40px; direction: ltr" value="10"></td>
+							<td></td>
+							<td><button type="button" id="btn_createArray" class="button aqua"><div class="glare"></div>צור מערך</button></td>
+							<!--
+				input.style.width = document.getElementById("inputs_width").value.toString() + "px"; // רוחב התא
+				<td>&emsp;רוחב כל איבר בפיקסלים</td>
+				<td><input type="number" value="40" min="5" max="20" id="inputs_width" style="width: 40px; direction: ltr"></td>
+		-->
+						</tr>
+					</table>
+				</fieldset>
+			</td>
+			<td valign="top" class="td_fieldset2">
+				<!-- td -->
+				<fieldset id="fieldset2" disabled>
+					<legend>מאפייני מיון:</legend>
+					שם המיון
+					<select id="select_sort" onchange="sortExplanation()">
+						<option value="bubble" selected="selected">Bubble - בועות/החלפה</option>
+						<option value="selection">Selection - בחירה</option>
+						<option value="insertion">Insertion - הכנסה</option>
+						<option value="quick">Quick - מהיר</option>
+						<option value="merge">Merge - מיזוג</option>
+						<option value="all">כל המיונים</option>
+					</select>
+					<!--
+			<td><input type="radio" name="speed" checked="checked">מהירות קבועה
+			<td valign="top"><input type="radio" name="speed">צעד אחר צעד</td>
+		-->
+					&emsp;לאט<input type="range" style="vertical-align: middle" id="speed">מהר &emsp;
+					<button type="button" id="btn_sort" class="button"><div class="glare"></div>מיין</button>
+					<br /><br />תאור:
+					<div id="explanation">
+						<script>
+									sortExplanation();
+						</script>
+					</div>
+				</fieldset>
+			</td>
+		</tr>
+	</table>
+	<br />
+	<button type="button" onclick="location.reload()" class="button aqua"><div class="glare"></div>נקה נתונים</button>
+	<br /><br />
+	<br />
+	<div>כמות השוואות: <div id="comp" style="display:inline-block">0</div></div>
+	<div>כמות החלפות: <div id="swap" style="display:inline-block">0</div></div>
+	<div id="arr" class ="arrContainer"></div>
+	<br />
+	<div>כמות השוואות: <div id="comp_bubble" style="display:inline-block">0</div></div>
+	<div>כמות החלפות: <div id="swap_bubble" style="display:inline-block">0</div></div>
+	<div id="arr_bubble" style="direction: ltr; text-align: right"></div>		
+	<br />
+	<div>כמות השוואות: <div id="comp_selection" style="display:inline-block">0</div></div>
+	<div>כמות החלפות: <div id="swap_selection" style="display:inline-block">0</div></div>
+	<div id="arr_selection" style="direction: ltr; text-align: right"></div>
+	<br />
+	<div>כמות השוואות: <div id="comp_insertion" style="display:inline-block">0</div></div>
+	<div>כמות החלפות: <div id="swap_insertion" style="display:inline-block">0</div></div>
+	<div id="arr_insertion" style="direction: ltr; text-align: right"></div>
+	<br />
+	<div>כמות השוואות: <div id="comp_quick" style="display:inline-block">0</div></div>
+	<div>כמות החלפות: <div id="swap_quick" style="display:inline-block">0</div></div>
+	<div id="arr_quick" style="direction: ltr; text-align: right"></div>
+	<br />
+	<div>כמות השוואות: <div id="comp_merge" style="display:inline-block">0</div></div>
+	<div>כמות החלפות: <div id="swap_merge" style="display:inline-block">0</div></div>
+	<div id="arr_merge" style="direction: ltr; text-align: right"></div>
+	<br />
+	<a href="http://validator.w3.org/check?uri=referer">
+	<img src="https://www.w3.org/html/logo/badge/html5-badge-h-css3-semantics.png" width="165" height="64" alt="HTML5 Powered with CSS3 / Styling, and Semantics" title="HTML5 Powered with CSS3 / Styling, and Semantics" /></a>
+	<br />
+	<a href="http://validator.w3.org/check?uri=referer">
+	<img src="https://www.w3.org/Icons/valid-css-blue" alt="Valid CSS!" height="31" width="88" /></a>
+</body>
+
+</html>
