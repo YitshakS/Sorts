@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!--Clean all inlinestyles
+Close all open HTML tags-->
 <html>
 
 <head>
@@ -16,21 +18,21 @@
 <body>
 	<table>
 		<tr>
-			<td valign="top" class="td_fieldset1">
+			<td valign="top" class="tdFieldset1">
 				<fieldset id="fieldset1">
 					<legend>מאפייני מערך:</legend>
 					<table>
 						<tr>
 							<td>צבע רקע תאי המערך</td>
-							<td><input type="color" value="#64dbcc" id="inputs_color1" style="width: 40px"></td>
-							<td>&emsp;צבע גבול שני תאים שמושווים או מוחלפים</td>
-							<td><input type="color" value="#ff0000" id="inputs_color3" style="width: 40px"></td>
+							<td><input type="color" value="#64dbcc" id="inputsColor1" style="width: 40px"></td>
+							<td>&emsp;צבע גבול שני תאים שמושווים</td>
+							<td><input type="color" value="#ff0000" id="inputsColor3" style="width: 40px"></td>
 						</tr>
 						<tr>
 							<td>צבע גופן תאי המערך</td>
-							<td><input type="color" value="" id="inputs_color2" style="width: 40px"></td>
+							<td><input type="color" value="" id="inputsColor2" style="width: 40px"></td>
 							<td>&emsp;צבע גבול תת מערך שמופעלת עליו רקורסיה</td>
-							<td><input type="color" value="#008000" id="inputs_color4" style="width: 40px"></td>
+							<td><input type="color" value="#008000" id="inputsColor4" style="width: 40px"></td>
 						</tr>
 						<tr>
 							<td>
@@ -40,7 +42,7 @@
 							<td>
 							</td>
 							<td><br />&emsp;מספר איברי המערך</td>
-							<td><br /><input type="number" value="10" min="5" max="20" id="inputs_num" style="width: 40px; direction: ltr"></td>
+							<td><br /><input type="number" value="10" min="5" max="20" id="inputsNum" style="width: 40px; direction: ltr"></td>
 						</tr>
 						<tr>
 							<td>
@@ -66,27 +68,27 @@
 							<td>ערך מקסימלי</td>
 							<td><input type="number" id="max" style="width: 40px; direction: ltr" value="10"></td>
 							<td></td>
-							<td><button type="button" id="btn_createArray" class="button aqua"><div class="glare"></div>צור מערך</button></td>
+							<td><button type="button" id="btnCreateArray" class="button aqua"><div class="glare"></div>צור מערך</button></td>
 							<!--
-				input.style.width = document.getElementById("inputs_width").value.toString() + "px"; // רוחב התא
+				input.style.width = document.getElementById("inputsWidth").value.toString() + "px"; // רוחב התא
 				<td>&emsp;רוחב כל איבר בפיקסלים</td>
-				<td><input type="number" value="40" min="5" max="20" id="inputs_width" style="width: 40px; direction: ltr"></td>
+				<td><input type="number" value="40" min="5" max="20" id="inputsWidth" style="width: 40px; direction: ltr"></td>
 		-->
 						</tr>
 					</table>
 				</fieldset>
 			</td>
-			<td valign="top" class="td_fieldset2">
+			<td valign="top" class="tdFieldset2">
 				<!-- td -->
 				<fieldset id="fieldset2" disabled>
 					<legend>מאפייני מיון:</legend>
 					שם המיון
-					<select id="select_sort" onchange="sortExplanation()">
+					<select id="selectSort" onchange="sortExplanation()">
 						<option value="bubble" selected="selected">Bubble - בועות/החלפה</option>
 						<option value="selection">Selection - בחירה</option>
 						<option value="insertion">Insertion - הכנסה</option>
-						<option value="quick">Quick - מהיר</option>
 						<option value="merge">Merge - מיזוג</option>
+						<option value="quick">Quick - מהיר</option>
 						<option value="all">כל המיונים</option>
 					</select>
 					<!--
@@ -94,12 +96,54 @@
 			<td valign="top"><input type="radio" name="speed">צעד אחר צעד</td>
 		-->
 					&emsp;לאט<input type="range" style="vertical-align: middle" id="speed">מהר &emsp;
-					<button type="button" id="btn_sort" class="button"><div class="glare"></div>מיין</button>
+					<button type="button" id="btnSort" class="button"><div class="glare"></div>מיין</button>
 					<br /><br />תאור:
-					<div id="explanation">
-						<script>
-									sortExplanation();
-						</script>
+					<div id="bubbleExplanation" style="display: block">
+						<ul>
+							<li>משווים כל איבר עם האיבר הבא אחריו. אם מוצאים איבר שגדול מהבא אחריו מחליפים ביניהם</li>
+							<li>כל איטרציה דוחפת קדימה למקומו את האיבר הכי גדול ויוצרת מיון מהסוף</li>
+							<li>לכן בכל איטרציה נתחיל מהאיבר הראשון עד האיבר במקום האחד לפני המקום שסיימנו לבדוק בפעם הקודמת</li>
+							<li>חוזרים על התהליך עד שבאיטרציה שלמה לא נמצאים שני איברים שאחד מהם גדול מהבא אחריו</li>
+						</ul>
+					</div>
+					<div id="selectionExplanation" style="display: none">
+						<ul>
+							<li>מחפשים מהאיבר הראשון עד האחרון את האיבר הקטן ביותר ומחליפים אותו עם האיבר הראשון</li>
+							<li>מחפשים מהאיבר השני עד האחרון את האיבר הקטן ביותר ומחליפים אותו עם האיבר השני</li>
+							<li>ממשיכים באותה השיטה עד סוף המערך</li>
+							<li>כל איטרציה דוחפת אחורה למקומו את האיבר הכי קטן ויוצרת מיון מההתחלה</li>
+							<li>לכן בכל איטרציה נתחיל מהאיבר במקום האחד אחרי המקום שממנו התחלנו לבדוק בפעם הקודמת</li>
+						</ul>
+					</div>
+					<div id="insertionExplanation" style="display: none">
+						<ul>
+							<li>לוקחים את האיבר השני, סורקים אחורה עד שנתקלים באיבר קטן או שווה לו, דוחפים מקום אחד קדימה את כל האיברים שנסרקו ומכניסים אותו לפניהם</li>
+							<li>לוקחים את האיבר השלישי, סורקים אחורה עד שנתקלים באיבר קטן או שווה לו, דוחפים מקום אחד קדימה את כל האיברים שנסרקו ומכניסים אותו לפניהם</li>
+							<li>ממשיכים באותה השיטה עד סוף המערך</li>
+							<li>כל איטרציה דוחפת אחורה למקומו את האיבר שנלקח ויוצרת מיון מההתחלה</li>
+							<li>לכן בכל איטרציה נקח את האיבר במקום האחד אחרי המקום שממנו לקחנו בפעם הקודמת ולכן סורקים אחורה רק עד שנתקלים באיבר קטן או שווה</li>
+							<li>(אם האיבר שלקחנו קטן מכל אלה שלפניו, הסריקה תגיע עד תחילת המערך, כולם יודחפו והוא יוכנס לפניהם)</li>
+							<li>ניתן לשפר את הסריקה ולבצעה בעזרת חיפוש בינארי, אך בגלל הדחיפות סיבוכיות המיון תשאר כפי שהיא</li>
+						</ul>
+					</div>
+					<div id="mergeExplanation" style="display: none">
+						<ul>
+							<li>ניתן למזג שני מערכים שכל אחד מהם ממויין, למערך אחד ממויין באופן הבא: כל עוד יש שני מערכים, נשווה בין שני האיברים הראשונים שלהם, נסיר את הקטן מביניהם ונוסיפו למערך הממוזג. אם הרשימות לא היו באותו האורך ונשארה רק רשימה אחת, נוסיף את כולה למערך המוזג</li>
+							<br />
+							<li>מחלקים כל מערך בחצי (במקרה שכמות התאים אי זוגית צד אחד יכלול תא אחד יותר)</li>
+							<li>חוזרים על התהליך ברקורסיה. תנאי עצירה הוא כשלא ניתן לחלק תת מערך כי הוא מכיל רק איבר אחד (איבר אחד הוא ממוין)</li>
+							<li>בנסיגה לאחור של הרקורסיות, ממזגים כל שני חצאים שחילקנו</li>
+							<li>בניגוד למיונים הלא רקורסיביים, בהם דאגנו להכניס כל איבר למקומו מבלי להתחשב בהזזות מיותרות של איברים אחרים, במיון זה אנו מנסים להתחשב בכל הזזה של כל איבר, לקרב אותו כמה שיותר למקומו ובכך לחסוך הזזות והשוואות מיותרות</li>
+						</ul>
+					</div>
+					<div id="quickExplanation" style="display: none">
+						<ul>
+							<li>בוחרים איבר אקראי (מכונה "pivot" ובעברית "ציר")</li>
+							<li>מעבירים את כל האיברים הקטנים ממנו לפניו והגדולים ממנו לאחריו (מבלי למיין ביניהם)</li>
+							<li>חוזרים על הפעולה הנ"ל באופן רקורסיבי על תת המערך הכולל רק את האיברים שהעברנו כעת לפניו וכן באופן רקורסיבי על תת המערך הכולל רק את האיברים שהעברנו כעת לאחריו</li>
+							<li>תנאי עצירה הוא כשלא ניתן לחלק תת מערך כי הוא מכיל רק איבר אחד (איבר אחד הוא ממוין). המיון יסתיים כשלא ניתן לחלק עוד אף מערך</li>
+							<li>בניגוד למיונים הלא רקורסיביים, בהם דאגנו להכניס כל איבר למקומו מבלי להתחשב בהזזות מיותרות של איברים אחרים, במיון זה אנו מנסים להתחשב בכל הזזה של כל איבר, לקרב אותו כמה שיותר למקומו ובכך לחסוך הזזות והשוואות מיותרות</li>
+						</ul>
 					</div>
 				</fieldset>
 			</td>
@@ -113,25 +157,25 @@
 	<div>כמות החלפות: <div id="swap" style="display:inline-block">0</div></div>
 	<div id="arr" class ="arrContainer"></div>
 	<br />
-	<div>כמות השוואות: <div id="comp_bubble" style="display:inline-block">0</div></div>
-	<div>כמות החלפות: <div id="swap_bubble" style="display:inline-block">0</div></div>
-	<div id="arr_bubble" style="direction: ltr; text-align: right"></div>		
+	<div>כמות השוואות: <div id="compBubble" style="display:inline-block">0</div></div>
+	<div>כמות החלפות: <div id="swapBubble" style="display:inline-block">0</div></div>
+	<div id="arrBubble" style="direction: ltr; text-align: right"></div>		
 	<br />
-	<div>כמות השוואות: <div id="comp_selection" style="display:inline-block">0</div></div>
-	<div>כמות החלפות: <div id="swap_selection" style="display:inline-block">0</div></div>
-	<div id="arr_selection" style="direction: ltr; text-align: right"></div>
+	<div>כמות השוואות: <div id="compSelection" style="display:inline-block">0</div></div>
+	<div>כמות החלפות: <div id="swapSelection" style="display:inline-block">0</div></div>
+	<div id="arrSelection" style="direction: ltr; text-align: right"></div>
 	<br />
-	<div>כמות השוואות: <div id="comp_insertion" style="display:inline-block">0</div></div>
-	<div>כמות החלפות: <div id="swap_insertion" style="display:inline-block">0</div></div>
-	<div id="arr_insertion" style="direction: ltr; text-align: right"></div>
+	<div>כמות השוואות: <div id="compInsertion" style="display:inline-block">0</div></div>
+	<div>כמות החלפות: <div id="swapInsertion" style="display:inline-block">0</div></div>
+	<div id="arrInsertion" style="direction: ltr; text-align: right"></div>
 	<br />
-	<div>כמות השוואות: <div id="comp_quick" style="display:inline-block">0</div></div>
-	<div>כמות החלפות: <div id="swap_quick" style="display:inline-block">0</div></div>
-	<div id="arr_quick" style="direction: ltr; text-align: right"></div>
+	<div>כמות השוואות: <div id="compQuick" style="display:inline-block">0</div></div>
+	<div>כמות החלפות: <div id="swapQuick" style="display:inline-block">0</div></div>
+	<div id="arrQuick" style="direction: ltr; text-align: right"></div>
 	<br />
-	<div>כמות השוואות: <div id="comp_merge" style="display:inline-block">0</div></div>
-	<div>כמות החלפות: <div id="swap_merge" style="display:inline-block">0</div></div>
-	<div id="arr_merge" style="direction: ltr; text-align: right"></div>
+	<div>כמות השוואות: <div id="compMerge" style="display:inline-block">0</div></div>
+	<div>כמות החלפות: <div id="swapMerge" style="display:inline-block">0</div></div>
+	<div id="arrMerge" style="direction: ltr; text-align: right"></div>
 	<br />
 	<a href="http://validator.w3.org/check?uri=referer">
 	<img src="https://www.w3.org/html/logo/badge/html5-badge-h-css3-semantics.png" width="165" height="64" alt="HTML5 Powered with CSS3 / Styling, and Semantics" title="HTML5 Powered with CSS3 / Styling, and Semantics" /></a>

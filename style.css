@@ -1,7 +1,9 @@
 @import url(http://fonts.googleapis.com/earlyaccess/alefhebrew.css);
 body {
-	font-family: "Alef Hebrew"; /* גופן אלף */
-	direction: rtl; /* טקסט מימין לשמאל */
+	font-family: "Alef Hebrew";
+	/* גופן אלף */
+	direction: rtl;
+	/* טקסט מימין לשמאל */
 }
 
 fieldset {
@@ -18,12 +20,12 @@ legend {
 	font-weight: bold;
 }
 
-.td_fieldset1 {
+.tdFieldset1 {
 	width: 35%;
 	height: 100%;
 }
 
-.td_fieldset2 {
+.tdFieldset2 {
 	width: 65%;
 	height: 100%;
 }
@@ -79,8 +81,9 @@ legend {
 .arrContainer {
 	direction: ltr;
 	text-align: right;
-	position: relative;
-/*	width: 100%;
+	position: absolute;
+	/*position: absolute;*/
+	/*	width: 100%;
 	margin: 0;
 	padding: 0;
 	margin-top: 60px;
@@ -89,14 +92,21 @@ legend {
 }
 
 .cell {
-	direction: ltr; /* מספר משמאל לימין אחרת מינוס יופיע מימין */
+	direction: ltr;
+	/* מספר משמאל לימין אחרת מינוס יופיע מימין */
 	border-color: DarkGray;
 	border-style: solid;
 	border-width: 1px;
-	width: 24px; /* רוחב ברירת מחדל של תא כשנבחרה אפשרות של הזנת ערכים ידנית */
-	font-family: Consolas; /* 'Courier New', Courier, monospace; :גופן שבו כל התווים באותו הרוחב. גופנים נוספים כאלה, שאינם ברירת מחדל בכרום */
-	padding: 2px 2px 2px 2px; /* לא זוכר למה רשמתי לבדוק האם ניתן להסיר */
-	top: 0;
-	left: 0;
-	overflow: hidden;
+	width: 24px;
+	/* רוחב ברירת מחדל של תא כשנבחרה אפשרות של הזנת ערכים ידנית */
+	font-family: Consolas;
+	/* 'Courier New', Courier, monospace; :גופן שבו כל התווים באותו הרוחב. גופנים נוספים כאלה, שאינם ברירת מחדל בכרום */
+	padding: 2px 2px 2px 2px;
+	/* לא זוכר למה רשמתי לבדוק האם ניתן להסיר */
+/*	top: 0; */
+/*	left: 0; */
+/*	overflow: hidden; */
+	position: relative;
+	/*position: absolute;*/
+/*	display: inherit; */
 }
